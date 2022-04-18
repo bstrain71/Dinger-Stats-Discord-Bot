@@ -15,7 +15,7 @@ msf = MySportsFeeds(version="2.0")
 msfToken = os.environ['MSF_TOKEN']
 msf.authenticate(msfToken, "MYSPORTSFEEDS")
 
-errorMessage = "Sorry I didn't understand that. Format commands like <!stats firstname-lastname stat> or <!stats lastname stat>. If a player's name has a space in it don't use spaces. A list of stats you can call are available at dingerstats.com/discordbot"
+errorMessage = "Stat unavailable. For more information visit https://dingerstats.com/discordbot"
 
 teamList = ['bal','bos','nyy','tb','tor','cws','cle','det','kc','min',
 'hou','laa','oak','sea','tex','atl','mia','nym','phi','was','chc','cin',
@@ -23,9 +23,9 @@ teamList = ['bal','bos','nyy','tb','tor','cws','cle','det','kc','min',
 
 def pStatsQuery(playerName, stat):
   "Queries MSF to get requested stat for requested player."
-  output = msf.msf_get_data(version='2.0',
+  output = msf.msf_get_data(version='2.1',
                            league='mlb',
-                           season='2021-regular',
+                           season='2022-regular',
                            feed = 'seasonal_player_stats',
                            player=playerName,
                            stats=stat,
@@ -34,9 +34,9 @@ def pStatsQuery(playerName, stat):
 
 def tStatsQuery(team, stat):
   "Queries MSF to get requested stat for requested player."
-  output = msf.msf_get_data(version='2.0',
+  output = msf.msf_get_data(version='2.1',
                            league='mlb',
-                           season='2021-regular',
+                           season='2022-regular',
                            feed = 'seasonal_team_stats',
                            team=team,
                            stats=stat,
