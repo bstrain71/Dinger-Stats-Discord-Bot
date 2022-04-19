@@ -4,6 +4,7 @@ import os
 import logging
 from playerStatsQueryFunction import playerStatsQuery
 from teamStatsQueryFunction import teamStatsQuery
+from replit import db
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
@@ -16,6 +17,8 @@ msfToken = os.environ['MSF_TOKEN']
 msf.authenticate(msfToken, "MYSPORTSFEEDS")
 
 errorMessage = "Stat unavailable. For more information visit https://dingerstats.com/discordbot"
+
+db['link'] = 'https://img1.wsimg.com/isteam/ip/6e90862e-61a0-4f91-bbf9-dff00ad964ee/20220418all_games-0002.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1280'
 
 teamList = ['bal','bos','nyy','tb','tor','cws','cle','det','kc','min',
 'hou','laa','oak','sea','tex','atl','mia','nym','phi','was','chc','cin',
@@ -82,7 +85,31 @@ async def on_message(message):
           #resp = msfReturn
  #removes the identifier numbers that discord adds to your username 
         await message.channel.send(resp)
-        
+
+
+    if(message.content.startswith('!123!@#qweQWEasdASD')):
+      author = message.author
+      guild = message.guild
+      content = message.content
+      logger.info(guild)
+      logger.info(author)
+      logger.info(content)
+      msgSplit = message.content.split()
+      db['link'] = msgSplit[1]
+      
+    if(message.content.startswith('!dingerstats')):
+      resp = db['link']
+      author = message.author
+      guild = message.guild
+      content = message.content
+      logger.info(guild)
+      logger.info(author)
+      logger.info(content)
+      await message.channel.send(resp)
+
+
+
+
 client.run(os.getenv('DISCORD_TOKEN')) #used to keep your bot token safe from other users
 
 """
